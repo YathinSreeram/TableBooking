@@ -1,5 +1,7 @@
 package com.yathin.TableBookingApplication.service;
 
+import com.yathin.TableBookingApplication.DTO.RestaurantDTO;
+import com.yathin.TableBookingApplication.DTO.RestaurantMapper;
 import com.yathin.TableBookingApplication.models.Reservation;
 import com.yathin.TableBookingApplication.models.Restaurant;
 import com.yathin.TableBookingApplication.models.Tables;
@@ -17,9 +19,17 @@ public class RestaurantService {
     @Autowired
     RestaurantRepository restaurant_repo;
 
+    @Autowired
+    RestaurantMapper restaurantMapper;
+
     public Restaurant saveRestaurant(Restaurant r)
     {
         return restaurant_repo.save(r);
+    }
+
+    public Restaurant getRestaurantById(int i)
+    {
+        return restaurant_repo.findById(i).orElse(null);
     }
 
     public List<Restaurant> getAllRestaurants() {
@@ -29,6 +39,11 @@ public class RestaurantService {
     public void deleteRestaurant(int res_id)
     {
         restaurant_repo.deleteById(res_id);
+    }
+
+    public List<RestaurantDTO> getAllRestaurantsNoTables()
+    {
+        return restaurant_repo.findAll().stream().map(restaurantMapper).toList();
     }
 
 }

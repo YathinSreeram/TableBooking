@@ -1,5 +1,6 @@
 package com.yathin.TableBookingApplication.controllers;
 
+import com.yathin.TableBookingApplication.Response.Response;
 import com.yathin.TableBookingApplication.models.Reservation;
 import com.yathin.TableBookingApplication.service.ReservationService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +21,7 @@ public class Reservationcontroller {
     }
 
     @GetMapping("/restaurant/{res_id}/getReservations")
-    public List<Reservation> reservationsInRestaurant(@PathVariable int res_id)
+    public Response<List<Reservation>> reservationsInRestaurant(@PathVariable int res_id)
     {
         return reservation_service.getReservations(res_id);
     }
@@ -28,8 +29,7 @@ public class Reservationcontroller {
     @DeleteMapping("/{reserve_id}/deleteReservation")
     public void deleteReservation(@PathVariable int reserve_id)
     {
-
-        reservation_service.deletereservations(reserve_id);
+        reservation_service.deleteReservations(reserve_id);
     }
 
 }

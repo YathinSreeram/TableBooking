@@ -1,9 +1,6 @@
 package com.yathin.TableBookingApplication.controllers;
 
-import com.yathin.TableBookingApplication.models.Restaurant;
 import com.yathin.TableBookingApplication.models.Tables;
-import com.yathin.TableBookingApplication.repositories.RestaurantRepository;
-import com.yathin.TableBookingApplication.service.ReservationService;
 import com.yathin.TableBookingApplication.service.TableService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -12,10 +9,6 @@ import org.springframework.web.bind.annotation.*;
 public class Tablecontroller {
     @Autowired
     TableService table_service;
-
-    @Autowired
-    RestaurantRepository restaurantRepository;
-
 
     @PostMapping("/{res_id}/addtable")
     public Tables addTableToRestaurant(@RequestBody Tables t, @PathVariable int res_id)

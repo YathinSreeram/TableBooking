@@ -1,9 +1,11 @@
 
 package com.yathin.TableBookingApplication.models;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
@@ -17,7 +19,7 @@ import java.util.List;
 public class Restaurant  {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "restaurantID")
     private int restaurantID;
 
@@ -35,77 +37,7 @@ public class Restaurant  {
     private List<Reservation> reservations;
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "restaurant")
-    private List<Review> review;
+    private List<Review> reviews;
 
-    public List<Reservation> getReservations() {
-        return reservations;
-    }
 
-    public void setReservations(List<Reservation> reservations) {
-        this.reservations = reservations;
-    }
-
-    public int getRestaurantID() {
-        return restaurantID;
-    }
-
-    public void setRestaurantID(int restaurantID) {
-        this.restaurantID = restaurantID;
-    }
-
-    public String getRestaurantName() {
-        return restaurantName;
-    }
-
-    public List<Review> getReviews() {
-        return review;
-    }
-
-    public void setReviews(List<Review> reviews) {
-        this.review = reviews;
-    }
-
-    public void setRestaurantName(String restaurantName) {
-        this.restaurantName = restaurantName;
-    }
-
-    public String getRestaurantLocation() {
-        return restaurantLocation;
-    }
-
-    public void setRestaurantLocation(String restaurantLocation) {
-        this.restaurantLocation = restaurantLocation;
-    }
-
-    public int getRestaurantTotalTableCount() {
-        return restaurantTotalTableCount;
-    }
-
-    public void setRestaurantTotalTableCount(int restaurantTotalTableCount) {
-        this.restaurantTotalTableCount = restaurantTotalTableCount;
-    }
-
-    public String getRestaurantDescription() {
-        return restaurantDescription;
-    }
-
-    public void setRestaurantDescription(String restaurantDescription) {
-        this.restaurantDescription = restaurantDescription;
-    }
-
-    public String getRestaurantCity() {
-        return restaurantCity;
-    }
-
-    public void setRestaurantCity(String restaurantCity) {
-        this.restaurantCity = restaurantCity;
-    }
-
-    public List<Tables> getTables() {
-        return tables;
-    }
-
-    public void setTables(List<Tables> tables) {
-        this.tables = tables;
-    }
 }

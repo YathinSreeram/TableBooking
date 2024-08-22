@@ -1,6 +1,6 @@
 package com.yathin.TableBookingApplication.service;
 
-import com.yathin.TableBookingApplication.exception.NotFoundException;
+import com.yathin.TableBookingApplication.Response.Response;
 import com.yathin.TableBookingApplication.models.Reservation;
 import com.yathin.TableBookingApplication.models.Restaurant;
 import com.yathin.TableBookingApplication.models.Tables;
@@ -10,8 +10,6 @@ import com.yathin.TableBookingApplication.repositories.RestaurantRepository;
 import com.yathin.TableBookingApplication.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.util.CollectionUtils;
-
 import java.util.List;
 
 @Service
@@ -42,20 +40,23 @@ public class ReservationService {
         r.setTable(table);
 
         return reservation_repo.save(r);
-
     }
 
-    public List<Reservation> getReservations(int res_id)
+    public Response<List<Reservation>> getReservations(int res_id)
     {
         Restaurant r = restaurantRepository.findById(res_id).orElse(null);
-        return r.getReservations();
+        if(r == null)
+            return Response.errorResponse("No restaurant found of the rest_id " + res_id );
+
+        if(r.getReservations() == null)
+            return Response.errorResponse("No reservations found of the rest_id " + res_id);
+
+        return Response.successResponse(r.getReservations(), "The list of reservations of the restaurant with id " + res_id);
     }
 
-    public void deletereservations(int reserve_id)
+    public void deleteReservations(int reserve_id)
     {
         reservation_repo.deleteById(reserve_id);
     }
-
-
 
 }

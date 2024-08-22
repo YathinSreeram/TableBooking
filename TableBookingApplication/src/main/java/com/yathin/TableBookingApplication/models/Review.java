@@ -1,11 +1,11 @@
 package com.yathin.TableBookingApplication.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import java.io.Serializable;
 
 @Data
 @NoArgsConstructor
@@ -13,57 +13,20 @@ import java.io.Serializable;
 @Entity
 public class Review {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int ratingID;
 
     private int rating;
-    private String reviews;
+    private String description;
 
     @ManyToOne
+    @JsonIgnore
+
     private User user;
 
     @ManyToOne
+    @JsonIgnore
     private Restaurant restaurant;
-
-    public String getReviews() {
-        return reviews;
-    }
-
-    public void setReviews(String reviews) {
-        this.reviews = reviews;
-    }
-
-    public int getRating() {
-        return rating;
-    }
-
-    public void setRating(int rating) {
-        this.rating = rating;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
-
-    public Restaurant getRestaurant() {
-        return restaurant;
-    }
-
-    public void setRestaurant(Restaurant restaurant) {
-        this.restaurant = restaurant;
-    }
-
-    public int getRatingID() {
-        return ratingID;
-    }
-
-    public void setRatingID(int ratingID) {
-        this.ratingID = ratingID;
-    }
 
 
 }
